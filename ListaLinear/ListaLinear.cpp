@@ -87,10 +87,11 @@ void exibirElementos()
 		cout << " A lista esta vazia \n";
 	}
 	else {
-		cout << "Elementos: \n";
+		cout << "Elementos: ";
 		for (int n = 0; n < nElementos; n++) {
-			cout << lista[n] << endl;
+			cout << lista[n] << " "; //numeros na horizontal
 		}
+		cout << endl;
 	}
 }
 
@@ -122,8 +123,23 @@ void inserirElemento()
 
 void excluirElemento()
 {
+	int valor;
+	cout << "Digite o elemento que deseja excluir: ";
+	cin >> valor;
+	int pos = posicaoElemento(valor);
 
+	if (pos == -1) {
+		cout << "O elemento nao foi encontrado" << endl;
+		return;
+	}
+		
+	for (int i = pos; i < nElementos - 1; i++) { //mover todos os elementos para a esquerda, sobrescrevendo o elemento a ser excluido
+		lista[i] =	lista[i + 1];
+	}
 
+	nElementos--;
+	
+	cout << "Elemento excluido" << endl;
 }
 
 void buscarElemento()
@@ -142,13 +158,11 @@ void buscarElemento()
 	}
 }
 
-int posicaoElemento(int busca)
-{
-	int posicao = -1;
+int posicaoElemento(int valor)  {
 	for (int i = 0; i < nElementos; i++) {
-		if (busca == lista[i]) {
-			posicao = i;
+		if (lista[i] == valor) {
+			return i;   
+			}
 		}
-	}
-	return posicao;
+	return -1;          
 }
